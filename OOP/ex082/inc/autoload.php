@@ -1,5 +1,6 @@
 <?php
 
+    declare(strict_types = 1);
     spl_autoload_register("load");
 
     function load($className) {

@@ -1,4 +1,5 @@
 <?php
+    declare(strict_types = 1);
     include "inc/autoload.php";
 ?>
 
@@ -13,10 +14,11 @@
     
     <?php
 
-        $test = new Test();
-        //$test->addUser("akinori", "br", "2005-8-13");
-        //$test->getUser(1);
-        $test->getUsers();
+        $controller = new UsersController();
+        //$controller->addUser('Ca', 'Polar', '2010-1-6');
+
+        $view = new UsersView();
+        $view->showUser(5);
 
     ?>
 
