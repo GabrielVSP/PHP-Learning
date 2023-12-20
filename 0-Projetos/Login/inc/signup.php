@@ -1,7 +1,7 @@
 <?php
 
 if(isset($_POST['submit'])) {
-
+    
     $name = $_POST['username'];
     $pass = $_POST['password'];
     $passRepeat = $_POST['passwordRepeat'];
@@ -14,5 +14,7 @@ if(isset($_POST['submit'])) {
     $controller = new SignUpController($name, $pass, $passRepeat, $email);
 
     $controller->signUp();
+
+    header("Location: ../index.php");
 
 }

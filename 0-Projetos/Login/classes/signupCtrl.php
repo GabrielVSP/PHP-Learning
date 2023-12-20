@@ -21,22 +21,26 @@
                 header("Location: ../index.php?error=emptyinputs");
                 die();
 
-            }else if (!$this->isUsernameValid()) {
+            }
+            if (!$this->isUsernameValid()) {
 
                 header("Location: ../index.php?error=invalidusername");
                 die();
 
-            }else if (!$this->isEmailValid()) {
+            }
+            if (!$this->isEmailValid()) {
 
                 header("Location: ../index.php?error=invalidemail");
                 die();
 
-            }else if (!$this->passwordMatch()) {
+            }
+            if (!$this->passwordMatch()) {
 
                 header("Location: ../index.php?error=passworddoenstmatch");
                 die();
 
-            }else if (!$this->checkUser()) {
+            }
+            if ($this->checkUser()) {
 
                 header("Location: ../index.php?error=useroremailalreadyexists");
                 die();

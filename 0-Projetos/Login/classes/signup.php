@@ -4,7 +4,7 @@
 
         protected function setUser(String $user, String $password, String $email) {
 
-            $sql = $this->connect()->prepare("INSERT INTO user (id, username, password, email) VALUES (null, ?, ?, ?)");
+            $sql = $this->connect()->prepare("INSERT INTO users (id, username, password, email) VALUES (null, ?, ?, ?)");
 
             $hash = password_hash($password, CRYPT_BLOWFISH);
 
@@ -30,7 +30,9 @@
 
             }
 
-            return $sql->rowCount() > 0;
+            $sql = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+            return count($sql) > 0;
 
         }
 

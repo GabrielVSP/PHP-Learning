@@ -1,10 +1,19 @@
 <?php
 
-    if(isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
 
-        $name = $_POST['username'];
-        $pass = $_POST['password'];
-        $passRepeat = $_POST['passwordRepeat'];
-        $email = $_POST['email'];
+    $pass = $_POST['password'];
+    $email = $_POST['email'];
 
-    }
+    include "../classes/db.php";
+    include "../classes/login.php";
+    include "../classes/loginCtrl.php";
+
+    $controller = new LoginController($pass, $email);
+    $controller->login();
+
+    //print_r($controller->login());
+
+    header("Location: ../index.php");
+
+}
