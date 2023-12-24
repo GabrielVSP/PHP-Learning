@@ -1,50 +1,57 @@
-<?php 
-    declare(strict_types = 1);
-    session_start();  
-    print_r($_SESSION);
+<?php
+
+declare(strict_types=1);
+session_start();
+
+$uri = $_SERVER["REQUEST_URI"];
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Project</title>
+    <title>Login</title>
+
+    <link rel="stylesheet" href="styles/header/header.css">
+    <link rel="stylesheet" href="styles/home/home.css">
+    <link rel="stylesheet" href="styles/footer/footer.css">
+
 </head>
+
 <body>
 
-    <div>
+    <main>
+        <?php
 
-        <?php if (isset($_SESSION['userID'])) {?>
-        <p><?= $_SESSION['userUID'] ?></p>
-        <a href="inc/logout.php">Logout</a>
-        <?php }?>
+            require "./inc/header.php";
 
-    </div>
-    
-    <h2>Register</h2>
+            switch ($uri) {
 
-    <form action="inc/signup.php" method="post">
+                case '':
+                case '/PHPLearn/0-Projetos/Login/':
+                    require __DIR__ . "/pages/home.php";
+                    break;
 
-        <input type="text" name="username" id="username" placeholder="Username">
-        <input type="text" name="email" id="email" placeholder="Email">
-        <input type="text" name="password" id="password">
-        <input type="text" name="passwordRepeat" id="password">
+                case "/PHPLearn/0-Projetos/Login/contact":
+                    require __DIR__ . "/pages/contact.php";
+                    break;
 
-        <input type="submit" value="Register" name="submit">
+                case "/PHPLearn/0-Projetos/Login/logout":
+                    require __DIR__ . "/pages/logout.php";
+                    break;
 
-    </form>
-    
-    <h2>Login</h2>
+                default:
+                    require __DIR__ . "/pages/404.php";
+                    break;
+            }
 
-    <form action="inc/login.php" method="post">
+            require "./inc/footer.php";
 
-        <input type="text" name="email" id="email" placeholder="Email">
-        <input type="text" name="password" id="password">
-
-        <input type="submit" value="Register" name="submit">
-
-    </form>
+        ?>
+    </main>
 
 </body>
+
 </html>
