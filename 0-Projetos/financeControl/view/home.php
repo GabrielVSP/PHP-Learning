@@ -5,6 +5,7 @@
     require ROOT . "/controller/inputController.php";
 
     $controller = new InputController();
+    $list = $controller->fetch();
 
     if (isset($_POST['submit'])) {
 
@@ -33,16 +34,18 @@
         <section class="display">
 
             <div class="in">
-                <p>+ <?= "R$" . number_format($controller->getLast('in')['value'], 2, ',', '.') ?></p>
+                <h2>Lucros</h2>
+                <p>+ <?= "R$" . number_format((float)$controller->getSum('in')[0], 2, ',', '.') ?></p>
             </div>
 
             <div class="out">
-                <p>- <?= "R$" . number_format($controller->getLast('out')['value'], 2, ',', '.') ?></p>
+                <h2>Perdas</h2>
+                <p>- <?= "R$" . number_format((float)$controller->getSum('out')[0], 2, ',', '.') ?></p>
             </div>
 
             <div class="total">
-
-                <p>R$ 00,00</p>
+                <h2>Final</h2>
+                <p> <?= "R$" . number_format((float)$controller->getSum('null')[0], 2, ',', '.') ?> </p>
 
             </div>
 
@@ -84,6 +87,20 @@
                 </tr>
 
             </thead>
+
+            <tbody>
+
+                <?php foreach($list as $key => $value) { ?>
+
+                    <tr>
+                        <td><?= $list[$key]['descr'] ?></td>
+                        <td><?= $list[$key]['value'] ?></td>
+                        <td><?= $list[$key]['bType'] === 'in' ? 'Entrada' : 'Saída' ?></td>
+                    </tr>
+
+                <?php } ?>
+
+            </tbody>
 
            </table>
 

@@ -13,9 +13,15 @@
 
         }
 
-        public function getLast(String $type) {
+        public function getSum($type) {
 
-           return $this->getLastEntry($type);
+           return $this->sumValues($type);
+
+        }
+
+        public function fetch() {
+
+            return $this->fetchList();
 
         }
 

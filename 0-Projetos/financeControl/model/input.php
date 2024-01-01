@@ -5,7 +5,7 @@
 
     class Input extends DB {
 
-        protected function addBought(String $type, Int $value, String $desc, String $cpf) {
+        protected function addBought(String $type, Float $value, String $desc, String $cpf) {
 
             $keys = new Keys();
             $key = $keys->getKey()[0];
@@ -30,7 +30,7 @@
 
         }
 
-        protected function getLastEntry($type) {
+        protected function getLastEntry(String $type) {
 
             $pdo = $this->connect();
 
@@ -38,6 +38,36 @@
             $sql->execute([$type]);
 
             return $sql->fetch();
+
+        }
+
+        protected function sumValues(String $type) {
+
+            $pdo = $this->connect();
+
+            if($type === "in" || $type === "out") {
+
+                $sql = $pdo->prepare("SELECT SUM(value) FROM boughts WHERE bType = ?");
+                $sql->execute([$type]);
+
+                return $sql->fetch();
+
+            }
+
+            $sql = $pdo->prepare("SELECT SUM(value) FROM boughts");
+            $sql->execute();      
+
+            return $sql->fetch();
+
+        }
+
+        protected function fetchList() {
+
+            $pdo = $this->connect();
+
+            $sql = $pdo->query("SELECT * FROM boughts");
+            
+            return $sql->fetchAll();
 
         }
 
