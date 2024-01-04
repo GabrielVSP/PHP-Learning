@@ -1,6 +1,6 @@
 <?php
 
-    $data = $argv[1];
+    $data = '05457305112';
 
     if(!file_exists('cryptkey.key')) {
 
@@ -14,6 +14,7 @@
     $iv = random_bytes(SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
 
     //O iv gera uma quantidade de bites que certifica que o texto ao ser cifrado(encriptado), não gere o mesmo código de encriptação
+
     echo sodium_bin2hex($iv . sodium_crypto_secretbox($data, $iv, $key));
 
-    echo PHP_EOL;
+    //echo PHP_EOL;
